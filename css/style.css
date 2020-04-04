@@ -1,0 +1,123 @@
+/**
+* @name style.css
+* @file Add a small description for this file.
+* @author Add Your Name Here <addyouremail@mail.com>
+* @version 1.0.0
+*/
+
+h1 {color:#0088cc;}
+
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+.userHeader {
+  color: white;
+  background-color: blue;
+}
+.usersContainer {
+    z-index: 1000;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-color: gainsboro;
+}
+
+.userContainer {
+    position: relative;
+    width: auto;
+    height: auto;
+    color: white;
+    margin: 5px;
+    background-color: gray;
+}
+
+.userContainerH3 {
+    color:cyan;
+}
+
+.userDetail {
+    z-index: 900;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-color: cornsilk;
+}
+
+button {
+    background-color: crimson;
+    padding: 20px;
+}
+
+/* Style the tab */
+.tab {
+    float: left;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+    width: 25%;
+    height: 800px;
+  }
+  
+/* Style the tab content */
+.tabcontent {
+    float: left;
+    padding: 0px 12px;
+    border: 1px solid #ccc;
+    width: 70%;
+    border-left: none;
+    height: 300px;
+  }
+
+
+
+/* 
+  ##Device = Desktops
+  ##Screen = 1281px to higher resolution desktops
+*/
+@media (min-width: 1281px) {
+  
+  
+}
+
+/* 
+  ##Device = Laptops, Desktops
+  ##Screen = B/w 1025px to 1280px
+*/
+@media (min-width: 1025px) and (max-width: 1280px) {
+
+  
+}
+
+/* 
+  ##Device = Tablets, Ipads (portrait)
+  ##Screen = B/w 768px to 1024px
+*/
+@media (min-width: 768px) and (max-width: 1024px) {
+  
+}
+
+/* 
+  ##Device = Tablets, Ipads (landscape)
+  ##Screen = B/w 768px to 1024px
+*/
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  
+  
+}
+
+/* 
+  ##Device = Low Resolution Tablets, Mobiles (Landscape)
+  ##Screen = B/w 481px to 767px
+*/
+@media (min-width: 481px) and (max-width: 767px) {
+  
+}
+
+/* 
+  ##Device = Most of the Smartphones Mobiles (Portrait)
+  ##Screen = B/w 320px to 479px
+*/
+@media (min-width: 320px) and (max-width: 480px) {
+
+}
