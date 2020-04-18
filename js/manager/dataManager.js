@@ -90,7 +90,7 @@ DataManager.prototype.processBeesResponse = function (text) {
     for (const key in data) {
         if (data.hasOwnProperty(key)) {
             var post = data[key];
-            this.posts.push(new Bees(post.name, post.username, post.email, post.phone, post.address.city, "0", "0"));
+            this.posts.push(new Bees(post.name, post.username, post.email, post.phone, post.address.city, "0", "0", "0"));
         }
     }
 

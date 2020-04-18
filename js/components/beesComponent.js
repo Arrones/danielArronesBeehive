@@ -34,7 +34,7 @@ class BeesComponent {
         this.cityP.innerHTML = bees.city;
         this.postP.innerHTML = bees.post;
         this.photosP.innerHTML = bees.photos;
-        this.todosP.innerHTML = bees.todosP;
+        this.todosP.innerHTML = bees.todos;
         //"<img src=\'https://images.unsplash.com/photo-1518806118471-f28b20a1d79d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80\' width=\'80px\' height=\80px\'>";
 
 
