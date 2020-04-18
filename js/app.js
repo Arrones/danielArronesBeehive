@@ -13,4 +13,6 @@ function init() {
 	//2. Initialize variables
 	//3. Events
 	//4. Program Logic
+
+	var appManager = new AppManager();
 }
