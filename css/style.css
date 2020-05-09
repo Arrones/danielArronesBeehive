@@ -5,83 +5,181 @@
 * @version 1.0.0
 */
 
-h1 {color:#0088cc;}
-
 * {
-    padding: 0px;
-    margin: 0px;
+  padding: 0px;
+  margin: 0px;
+}
+
+h1 {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 30px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 700;
+  line-height: 26.4px;
+  color: #f1f1f1;
+  text-align: center;
+}
+h2 {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 20px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 700;
+  line-height: 15.4px;
+  text-align: center;
+  margin: 10px;
+}
+p {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
+  line-height: 20px;
+}
+blockquote {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 21px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
+  line-height: 30px;
+}
+pre {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
+  line-height: 18.5714px;
+}
+
+.header, .footer {
+  padding: 40px;
+  background: #0063ff;
+}
+
+.footer-text {
+  text-align: left;
+  color: #f1f1f1;
 }
 
 .userHeader {
   color: white;
-  background-color: blue;
+  background-color: #0063ff;
 }
+
 .usersContainer {
-    z-index: 1000;
-    position: absolute;
-    width: 100vw;
-    height: 100vh;
-    background-color: gainsboro;
+  z-index: 1000;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: gainsboro;
 }
 
 .userContainer {
-    position: relative;
-    width: auto;
-    height: auto;
-    color: white;
-    margin: 5px;
-    background-color: gray;
+  position: relative;
+  width: auto;
+  height: auto;
+  color: white;
+  margin: 5px;
+  background-color: gray;
 }
 
 .userContainerH3 {
-    color:cyan;
+  color: cyan;
 }
 
 .userDetail {
-    z-index: 900;
-    position: absolute;
-    width: 100vw;
-    height: 100vh;
-    background-color: cornsilk;
+  z-index: 900;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: cornsilk;
 }
 
 button {
-    background-color: crimson;
-    padding: 20px;
+  background-color: crimson;
+  padding: 20px;
+}
+
+.none{
+  display: none !important;
 }
 
 /* Style the tab */
 .tab {
-    float: left;
-    border: 1px solid #ccc;
-    background-color: #f1f1f1;
-    width: 25%;
-    height: 800px;
-  }
-  
-/* Style the tab content */
-.tabcontent {
-    float: left;
-    padding: 0px 12px;
-    border: 1px solid #ccc;
-    width: 70%;
-    border-left: none;
-    height: 300px;
-  }
-
-.beesContainerH3 {
-    color:cyan;
+  /*float: left;
+  border: 1px solid #ccc;
+  width: 25%;
+  height: 100vh;
+*/
+  position: relative;
+  background-color: #f1f1f1;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 25%;
+  height: 75vh;
+  overflow: auto;
+  border-radius: 10px;
 }
 
+.tab-tittle {
+  color: #009fff;
+}
 
+/* Style the tab content */
+.tabcontent {
+  float: left;
+  padding: 0px 12px;
+  border: 1px solid #ccc;
+  width: 70%;
+  border-left: none;
+  height: 300px;
+}
 
+.mainView {
+  display: flex;
+}
+input, label {
+  display:block;
+}
+
+.bees-container{
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+
+.bees-card {
+  width: 85%;
+  height: 100%;
+  background-color: #f1f1f1;;
+  background: linear-gradient(#f8f8f8, #fff);
+  box-shadow: 0 8px 16px -8px rgba(0,0,0,0.4);
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 0px 10px 10px 10px;
+}
+
+.bees-card-text {
+  margin: 3px;
+}
+
+.profile-image {
+  margin-top: 15px;
+  align-items: center;
+}
 /* 
   ##Device = Desktops
   ##Screen = 1281px to higher resolution desktops
 */
 @media (min-width: 1281px) {
-  
-  
 }
 
 /* 
@@ -89,8 +187,6 @@ button {
   ##Screen = B/w 1025px to 1280px
 */
 @media (min-width: 1025px) and (max-width: 1280px) {
-
-  
 }
 
 /* 
@@ -98,7 +194,6 @@ button {
   ##Screen = B/w 768px to 1024px
 */
 @media (min-width: 768px) and (max-width: 1024px) {
-  
 }
 
 /* 
@@ -106,8 +201,6 @@ button {
   ##Screen = B/w 768px to 1024px
 */
 @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
-  
-  
 }
 
 /* 
@@ -115,7 +208,6 @@ button {
   ##Screen = B/w 481px to 767px
 */
 @media (min-width: 481px) and (max-width: 767px) {
-  
 }
 
 /* 
@@ -123,5 +215,4 @@ button {
   ##Screen = B/w 320px to 479px
 */
 @media (min-width: 320px) and (max-width: 480px) {
-
 }

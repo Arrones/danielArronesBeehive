@@ -14,8 +14,8 @@ UIManager.prototype.createUI = function () {
     console.log('showBeesView');
     this.mainView = new MainView(this.appManager.dataManager.posts, this.appContainer, this.showNewPostView.bind(this));
 
-    this.newPostView = new NewPostView(this.appContainer, null);
-    this.newPostView.hide();
+   // this.newPostView = new NewPostView(this.appContainer, null);
+    //this.newPostView.hide();
 };
 
 UIManager.prototype.showNewPostView = function () {

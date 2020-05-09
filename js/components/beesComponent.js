@@ -4,7 +4,11 @@ class BeesComponent {
         this.bees = bees;
         this.beesContainer = document.createElement('div');
         this.imgDiv = document.createElement('div');
-        this.nameH3 = document.createElement('h3');
+        this.dataDiv = document.createElement('div');
+        //this.buttonsDiv = document.createElement('div');
+
+
+        this.nameH3 = document.createElement('h2');
         this.userNameP = document.createElement('p');
         this.emailP = document.createElement('p');
         this.phoneP = document.createElement('p');
@@ -12,21 +16,32 @@ class BeesComponent {
         this.postP = document.createElement('p');
         this.photosP = document.createElement('p');
         this.todosP = document.createElement('p');
+         
+        this.nameH3.classList.add('bees-card-text');
+        this.userNameP.classList.add('bees-card-text');
+        this.emailP.classList.add('bees-card-text');
+        this.phoneP.classList.add('bees-card-text');
+        this.cityP.classList.add('bees-card-text');
+        this.postP.classList.add('bees-card-text');
+        this.photosP.classList.add('bees-card-text');
+        this.todosP.classList.add('bees-card-text');
 
 
+        //this.beesContainer.appendChild(this.imgDiv);
+        this.beesContainer.appendChild(this.dataDiv);
+        //this.beesContainer.appendChild(this.buttonsDiv);
 
-        this.beesContainer.appendChild(this.imgDiv);
-        this.beesContainer.appendChild(this.nameH3);
-        this.beesContainer.appendChild(this.userNameP);
-        this.beesContainer.appendChild(this.emailP);
-        this.beesContainer.appendChild(this.phoneP);
-        this.beesContainer.appendChild(this.cityP);
-        this.beesContainer.appendChild(this.postP);
-        this.beesContainer.appendChild(this.photosP);
-        this.beesContainer.appendChild(this.todosP);
+        this.dataDiv.appendChild(this.imgDiv);
+        this.dataDiv.appendChild(this.nameH3);
+        this.dataDiv.appendChild(this.userNameP);
+        this.dataDiv.appendChild(this.emailP);
+        this.dataDiv.appendChild(this.phoneP);
+        this.dataDiv.appendChild(this.cityP);
+        /*this.dataDiv.appendChild(this.postP);
+        this.dataDiv.appendChild(this.photosP);
+        this.dataDiv.appendChild(this.todosP);*/
 
-
-        this.imgDiv.innerHTML = '';
+        this.imgDiv.innerHTML = "<img src=resources/homero.jpg width=\'99px\' height=\'99px\'>";
         this.nameH3.innerHTML = bees.name;
         this.userNameP.innerHTML = bees.userName;
         this.emailP.innerHTML = bees.email;
@@ -35,11 +50,14 @@ class BeesComponent {
         this.postP.innerHTML = bees.post;
         this.photosP.innerHTML = bees.photos;
         this.todosP.innerHTML = bees.todos;
-        //"<img src=\'https://images.unsplash.com/photo-1518806118471-f28b20a1d79d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80\' width=\'80px\' height=\80px\'>";
+        
+        this.imgDiv.classList.add('profile-image');
+        this.dataDiv.classList.add('bees-card');
+        //this.buttonsDiv.classList.add('column');
 
 
-        this.beesContainer.classList.add('beesContainer');
-        this.nameH3.classList.add('beesContainerH3');
+        this.beesContainer.classList.add('bees-container');
+        //this.nameH3.classList.add('beesContainerH3');
         beesContainer.appendChild(this.beesContainer);
 
         this.callback = callback;
