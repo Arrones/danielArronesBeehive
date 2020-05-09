@@ -1,5 +1,6 @@
 function DataManager(appManager) {
     this.appManager = appManager;
+    this.users = [];
     this.posts = [];
 }
 
@@ -16,21 +17,21 @@ DataManager.prototype.startTodosDownload = function () {
     var request = new XMLHttpRequest();
     request.open('GET', url);
     request.send();
-    request.onreadystatechange = this.processPostsRequest.bind(this);
+    request.onreadystatechange = this.processPostRequest.bind(this);
 }
 DataManager.prototype.startPhotosDownload = function () {
     var url = 'https://beehive-270a2.firebaseio.com/data/photos.json';
     var request = new XMLHttpRequest();
     request.open('GET', url);
     request.send();
-    request.onreadystatechange = this.processPostsRequest.bind(this);
+    request.onreadystatechange = this.processPostRequest.bind(this);
 }
 DataManager.prototype.startAlbumsDownload = function () {
     var url = 'https://beehive-270a2.firebaseio.com/data/albums.json';
     var request = new XMLHttpRequest();
     request.open('GET', url);
     request.send();
-    request.onreadystatechange = this.processPostsRequest.bind(this);
+    request.onreadystatechange = this.processPostRequest.bind(this);
 }
 
 DataManager.prototype.startCommentsDownload = function () {
@@ -38,7 +39,7 @@ DataManager.prototype.startCommentsDownload = function () {
     var request = new XMLHttpRequest();
     request.open('GET', url);
     request.send();
-    request.onreadystatechange = this.processPostsRequest.bind(this);
+    request.onreadystatechange = this.processPostRequest.bind(this);
 }
 
 DataManager.prototype.startPostsDownload = function () {
@@ -49,7 +50,7 @@ DataManager.prototype.startPostsDownload = function () {
     request.onreadystatechange = this.processPostsRequest.bind(this);
 }
 
-DataManager.prototype.processPostsRequest = function (e) {
+DataManager.prototype.processPostRequest = function (e) {
     var request = e.target;
     if (request.readyState === 4) {
         console.log(request);
@@ -71,8 +72,24 @@ DataManager.prototype.processBeesRequest = function (e) {
         console.log(request);
         switch (request.status) {
             case 200:
-                console.log('TODO COOOL');
+                console.log('USERS OK');
                 this.processBeesResponse(request.responseText);
+                break;
+            case 404:
+                console.log('ALGO NO ESTA BIEN');
+                break;
+        }
+    }
+};
+
+DataManager.prototype.processPostsRequest = function (e) {
+    var request = e.target;
+    if (request.readyState === 4) {
+        console.log(request);
+        switch (request.status) {
+            case 200:
+                console.log('POST OK');
+                this.processPostsResponse(request.responseText);
                 break;
             case 404:
                 console.log('ALGO NO ESTA BIEN');
@@ -90,7 +107,24 @@ DataManager.prototype.processBeesResponse = function (text) {
     for (const key in data) {
         if (data.hasOwnProperty(key)) {
             var post = data[key];
-            this.posts.push(new Bees(post.name, post.username, post.email, post.phone, post.address.city, "0", "0", "0"));
+            this.users.push(new Bees(post.name, post.username, post.email, post.phone, post.address.city, "0", "0", "0"));
+        }
+    }
+
+    //console.log(this.users);
+    //this.appManager.uiManager.createUI();
+};
+
+DataManager.prototype.processPostsResponse = function (text) {
+
+    var data = JSON.parse(text);
+
+    console.log(data);
+
+    for (const key in data) {
+        if (data.hasOwnProperty(key)) {
+            var post = data[key];
+            this.posts.push(new Post(post.id, post.body, post.title, post.userId));
         }
     }
 

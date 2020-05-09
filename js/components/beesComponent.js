@@ -1,7 +1,7 @@
 class BeesComponent {
-    constructor(bees, beesContainer, callback) {
+    constructor(bees, callback) {
 
-        this.bees = bees;
+        this.bees = document.getElementById('Bees');
         this.beesContainer = document.createElement('div');
         this.imgDiv = document.createElement('div');
         this.dataDiv = document.createElement('div');
@@ -58,7 +58,7 @@ class BeesComponent {
 
         this.beesContainer.classList.add('bees-container');
         //this.nameH3.classList.add('beesContainerH3');
-        beesContainer.appendChild(this.beesContainer);
+        this.bees.appendChild(this.beesContainer);
 
         this.callback = callback;
 

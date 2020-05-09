@@ -2,7 +2,7 @@ function UIManager(appManager) {
     this.appManager = appManager;
     this.mainView = null;
     this.newPostView = null;
-    this.appContainer = document.getElementById('Bees');
+    this.appContainer = document.getElementById('MainView');
 
 }
 
@@ -12,7 +12,7 @@ UIManager.prototype.showLoader = function () {
 
 UIManager.prototype.createUI = function () {
     console.log('showBeesView');
-    this.mainView = new MainView(this.appManager.dataManager.posts, this.appContainer, this.showNewPostView.bind(this));
+    this.mainView = new MainView(this.appManager.dataManager, this.appContainer, this.showNewPostView.bind(this));
 
    // this.newPostView = new NewPostView(this.appContainer, null);
     //this.newPostView.hide();

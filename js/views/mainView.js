@@ -1,9 +1,15 @@
-function MainView(posts, parent, newPostCallback) {
+function MainView(datamanager, parent, newPostCallback) {
 
     this.beesComponents = [];
+    this.postComponents = [];
 
-    posts.forEach(post => {
-        this.beesComponents.push(new BeesComponent(post, parent));
+    datamanager.users.forEach(user => {
+        this.beesComponents.push(new BeesComponent(user));
     });
+
+    datamanager.posts.forEach(post => {
+        this.postComponents.push(new PostsComponent(post));
+    });
+
 
 }
