@@ -1,141 +1,126 @@
 function DataManager(appManager) {
-    this.appManager = appManager;
-    this.users = [];
-    this.posts = [];
+  this.appManager = appManager;
+  this.users = [];
+  this.albums = [];
+  this.posts = [];
+  this.todos = [];
 }
 
-DataManager.prototype.startUsersDownload = function () {
-    var url = 'https://beehive-270a2.firebaseio.com/data/users.json';
-    var request = new XMLHttpRequest();
-    request.open('GET', url);
-    request.send();
-    request.onreadystatechange = this.processBeesRequest.bind(this);
-}
+DataManager.prototype.startBeesDownloads = function () {
+  const urlUsers = fetch(
+    "https://beehive-270a2.firebaseio.com/data/users.json"
+  );
+  const urlPost = fetch("https://beehive-270a2.firebaseio.com/data/posts.json");
+  const urlComments = fetch(
+    "https://beehive-270a2.firebaseio.com/data/comments.json"
+  );
+  const urlAlbums = fetch(
+    "https://beehive-270a2.firebaseio.com/data/albums.json"
+  );
+  const urlPhotos = fetch(
+    "https://beehive-270a2.firebaseio.com/data/photos.json"
+  );
+  const urlTodos = fetch(
+    "https://beehive-270a2.firebaseio.com/data/todos.json"
+  );
 
-DataManager.prototype.startTodosDownload = function () {
-    var url = 'https://beehive-270a2.firebaseio.com/data/todos.json';
-    var request = new XMLHttpRequest();
-    request.open('GET', url);
-    request.send();
-    request.onreadystatechange = this.processPostRequest.bind(this);
-}
-DataManager.prototype.startPhotosDownload = function () {
-    var url = 'https://beehive-270a2.firebaseio.com/data/photos.json';
-    var request = new XMLHttpRequest();
-    request.open('GET', url);
-    request.send();
-    request.onreadystatechange = this.processPostRequest.bind(this);
-}
-DataManager.prototype.startAlbumsDownload = function () {
-    var url = 'https://beehive-270a2.firebaseio.com/data/albums.json';
-    var request = new XMLHttpRequest();
-    request.open('GET', url);
-    request.send();
-    request.onreadystatechange = this.processPostRequest.bind(this);
-}
+  Promise.all([urlUsers, urlPost, urlComments, urlAlbums, urlPhotos, urlTodos])
+    .then((response) => {
+      return Promise.all(response.map((res) => res.json()));
+    })
+    .then((response) => {
+      response[5].forEach((todos) => {
+        var todos = new Todos(
+          todos.id,
+          todos.userId,
+          todos.completed,
+          todos.title
+        );
+        this.todos.push(todos);
+      });
 
-DataManager.prototype.startCommentsDownload = function () {
-    var url = 'https://beehive-270a2.firebaseio.com/data/comments.json';
-    var request = new XMLHttpRequest();
-    request.open('GET', url);
-    request.send();
-    request.onreadystatechange = this.processPostRequest.bind(this);
-}
+      response[3].forEach((album) => {
+        var photoArray = [];
+        response[4].forEach((photo) => {
+          if (album.id === photo.albumId) {
+            photo = new Photos(
+              photo.id,
+              album.id,
+              photo.thumbnailUrl,
+              photo.title,
+              photo.url
+            );
+            photoArray.push(photo);
+          }
+        });
+        album = new Album(album.id, album.title, album.userId, photoArray);
+        this.albums.push(album);
+      });
 
-DataManager.prototype.startPostsDownload = function () {
-    var url = 'https://beehive-270a2.firebaseio.com/data/posts.json';
-    var request = new XMLHttpRequest();
-    request.open('GET', url);
-    request.send();
-    request.onreadystatechange = this.processPostsRequest.bind(this);
-}
+      response[1].forEach((post) => {
+        var commentsArray = [];
 
-DataManager.prototype.processPostRequest = function (e) {
-    var request = e.target;
-    if (request.readyState === 4) {
-        console.log(request);
-        switch (request.status) {
-            case 200:
-                console.log('TODO COOOL');
-                this.processPostResponse(request.responseText);
-                break;
-            case 404:
-                console.log('ALGO NO ESTA BIEN');
-                break;
+        if (response[2] != null) {
+          response[2].forEach((comments) => {
+            if (post.id === comments.id) {
+              comments = new Comments(
+                comments.id,
+                comments.email,
+                comments.name,
+                comments.body,
+                post.id
+              );
+              commentsArray.push(comments);
+            }
+          });
         }
-    }
-};
+        posts = new Post(
+          post.id,
+          post.body,
+          post.title,
+          post.userId,
+          commentsArray
+        );
+        this.posts.push(posts);
+      });
 
-DataManager.prototype.processBeesRequest = function (e) {
-    var request = e.target;
-    if (request.readyState === 4) {
-        console.log(request);
-        switch (request.status) {
-            case 200:
-                console.log('USERS OK');
-                this.processBeesResponse(request.responseText);
-                break;
-            case 404:
-                console.log('ALGO NO ESTA BIEN');
-                break;
-        }
-    }
-};
+      response[0].forEach((user) => {
+        let albumsArray = [];
+        let postsArray = [];
+        let todosArray = [];
 
-DataManager.prototype.processPostsRequest = function (e) {
-    var request = e.target;
-    if (request.readyState === 4) {
-        console.log(request);
-        switch (request.status) {
-            case 200:
-                console.log('POST OK');
-                this.processPostsResponse(request.responseText);
-                break;
-            case 404:
-                console.log('ALGO NO ESTA BIEN');
-                break;
-        }
-    }
-};
+        this.albums.forEach((album) => {
+          if (album.userId === user.id) {
+            albumsArray.push(album);
+          }
+        });
 
-DataManager.prototype.processBeesResponse = function (text) {
+        this.posts.forEach((post) => {
+          if (post.userId === user.id) {
+            postsArray.push(post);
+          }
+        });
 
-    var data = JSON.parse(text);
+        this.todos.forEach((todo) => {
+          if (todo.userId === user.id) {
+            todosArray.push(todo);
+          }
+        });
 
-    console.log(data);
+        user = new Bees(
+          user.id,
+          user.name,
+          user.username,
+          user.email,
+          user.phone,
+          user.address.city,
+          postsArray,
+          albumsArray,
+          todosArray
+        );
+        this.users.push(user);
+      });
 
-    for (const key in data) {
-        if (data.hasOwnProperty(key)) {
-            var post = data[key];
-            this.users.push(new Bees(post.name, post.username, post.email, post.phone, post.address.city, "0", "0", "0"));
-        }
-    }
-
-    //console.log(this.users);
-    //this.appManager.uiManager.createUI();
-};
-
-DataManager.prototype.processPostsResponse = function (text) {
-
-    var data = JSON.parse(text);
-
-    console.log(data);
-
-    for (const key in data) {
-        if (data.hasOwnProperty(key)) {
-            var post = data[key];
-            this.posts.push(new Post(post.id, post.body, post.title, post.userId));
-        }
-    }
-
-    console.log(this.posts);
-    this.appManager.uiManager.createUI();
-};
-
-DataManager.prototype.processPostResponse = function (text) {
-
-    var data = JSON.parse(text);
-
-    console.log(data);
-
+      this.appManager.uiManager.createUI();
+    });
 };

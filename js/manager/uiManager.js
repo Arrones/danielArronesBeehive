@@ -7,15 +7,11 @@ function UIManager(appManager) {
 }
 
 UIManager.prototype.showLoader = function () {
-    console.log('showLoader');
+
 }
 
 UIManager.prototype.createUI = function () {
-    console.log('showBeesView');
     this.mainView = new MainView(this.appManager.dataManager, this.appContainer, this.showNewPostView.bind(this));
-
-   // this.newPostView = new NewPostView(this.appContainer, null);
-    //this.newPostView.hide();
 };
 
 UIManager.prototype.showNewPostView = function () {

@@ -37,9 +37,9 @@ class BeesComponent {
         this.dataDiv.appendChild(this.emailP);
         this.dataDiv.appendChild(this.phoneP);
         this.dataDiv.appendChild(this.cityP);
-        /*this.dataDiv.appendChild(this.postP);
+        this.dataDiv.appendChild(this.postP);
         this.dataDiv.appendChild(this.photosP);
-        this.dataDiv.appendChild(this.todosP);*/
+        this.dataDiv.appendChild(this.todosP);
 
         this.imgDiv.innerHTML = "<img src=resources/homero.jpg width=\'99px\' height=\'99px\'>";
         this.nameH3.innerHTML = bees.name;
@@ -47,9 +47,9 @@ class BeesComponent {
         this.emailP.innerHTML = bees.email;
         this.phoneP.innerHTML = bees.phone;
         this.cityP.innerHTML = bees.city;
-        this.postP.innerHTML = bees.post;
-        this.photosP.innerHTML = bees.photos;
-        this.todosP.innerHTML = bees.todos;
+        this.postP.innerHTML = "Posts " + bees.post.length;
+        this.photosP.innerHTML = "Photos " +bees.album.length;
+        this.todosP.innerHTML = "To-Do's " +bees.todos.length;
         
         this.imgDiv.classList.add('profile-image');
         this.dataDiv.classList.add('bees-card');
